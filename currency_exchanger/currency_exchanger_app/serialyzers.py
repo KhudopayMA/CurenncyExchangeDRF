@@ -5,11 +5,13 @@ from rest_framework.validators import UniqueValidator
 
 from .models import Currency, ExchangeRate
 
+
 class CurrencyCodeAlreadyExist(APIException):
     status_code = status.HTTP_409_CONFLICT
 
-class CurrenciesSerializer(serializers.Serializer):
 
+class CurrenciesSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
     code = serializers.CharField(max_length=3)
     name = serializers.CharField(max_length=100)
     sign = serializers.CharField(max_length=3)
@@ -19,13 +21,15 @@ class CurrenciesSerializer(serializers.Serializer):
 
     def validate_code(self, data):
         if Currency.objects.filter(code=data).exists():
-            raise CurrencyCodeAlreadyExist(detail=f"Currency {data} already exists")
+            raise CurrencyCodeAlreadyExist(detail=f"Currency with code {data} already exists")
         return data
+
 
 class CurrencySerializer(serializers.ModelSerializer):
     class Meta:
         model = Currency
         fields = '__all__'
+
 
 class ExchangeRatesSerializer(serializers.ModelSerializer):
 

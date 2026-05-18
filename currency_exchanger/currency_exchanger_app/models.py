@@ -1,7 +1,8 @@
 from django.db import models
 
+
 class Currency(models.Model):
-    currency_id = models.BigAutoField(
+    id = models.BigAutoField(
         primary_key=True,
         unique=True,
         db_column='ID'
@@ -25,8 +26,9 @@ class Currency(models.Model):
     class Meta:
         db_table = "Сurrencies"
 
+
 class ExchangeRate(models.Model):
-    exchange_rate_id = models.BigAutoField(
+    id = models.BigAutoField(
         primary_key=True,
         db_column='ID'
     )

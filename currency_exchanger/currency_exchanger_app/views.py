@@ -25,15 +25,13 @@ class CurrenciesViewSet(APIView):
                 return Response(serializer.data)
         except ValidationError:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        # except Exception as e:
-        #     return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 
 
 class CurrencyView(APIView):
 
     def get(self, request, code):
-        # code = request.GET.get('code')
         try:
             currency = Currency.objects.get(code=code)
             serializer = CurrencySerializer(currency)
@@ -41,7 +39,24 @@ class CurrencyView(APIView):
         except Currency.DoesNotExist:
             return Response(f"Currency with code {code} not found", status=status.HTTP_404_NOT_FOUND)
 
-class ExchangeRatesViewSet(viewsets.ModelViewSet):
-    queryset = ExchangeRate.objects.all()
-    serializer_class = ExchangeRatesSerializer
+class ExchangeRatesView(APIView):
+
+    def get(self, request):
+        exchange_rates = ExchangeRate.objects.all()
+        serializer = ExchangeRatesSerializer(exchange_rates, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        try:
+            serializer = ExchangeRatesSerializer(data=request.data)
+            serializer
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data)
+        except ValidationError:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# class ExchangeRatesViewSet(viewsets.ModelViewSet):
+#     queryset = ExchangeRate.objects.all()
+#     serializer_class = ExchangeRatesSerializer
 
