@@ -13,7 +13,19 @@ class CurrencyRepository:
         return Currency.objects.all()
 
     def create(self, data: CurrencyDto) -> Currency:
-        return Currency.objects.create(**asdict(data))
+        try:
+            return Currency.objects.create(**asdict(data))
+        except IntegrityError as e:
+            error_msg = str(e)
+            if "UNIQUE constraint failed" in error_msg:
+                filed = error_msg.split(".")[-1].lower()
+                # return Response(
+                #     f"Field {filed} with value {request_serializer.validated_data.get(filed)} already exists.",
+                #     status=status.HTTP_409_CONFLICT,
+                # )
+                raise IntegrityError(
+                    f"Field {filed} with value {getattr(data, filed)} already exists."
+                )
 
     def get(self, **params) -> Currency:
         return Currency.objects.get(**params)
