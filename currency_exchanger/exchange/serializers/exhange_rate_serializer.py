@@ -3,11 +3,13 @@ from rest_framework import serializers
 from exchange.serializers import CurrencySerializer
 
 
-class ExchangeRateSerializer(serializers.Serializer):
-    baseCurrencyCode = serializers.CharField(max_length=3, write_only=True)
-    targetCurrencyCode = serializers.CharField(max_length=3, write_only=True)
+class ExchangeRateCreateSerializer(serializers.Serializer):
+    baseCurrencyCode = serializers.CharField(max_length=3)
+    targetCurrencyCode = serializers.CharField(max_length=3)
+    rate = serializers.FloatField()
 
-    baseCurrency = CurrencySerializer(source="base_currency", read_only=True)
-    targetCurrency = CurrencySerializer(source="target_currency", read_only=True)
 
+class ExchangeRateResponseSerializer(serializers.Serializer):
+    baseCurrency = CurrencySerializer(source='base_currency')
+    targetCurrency = CurrencySerializer(source='target_currency')
     rate = serializers.FloatField()

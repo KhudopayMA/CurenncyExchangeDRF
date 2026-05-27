@@ -10,11 +10,12 @@ from exchange.dto import CurrencyDto
 
 class CurrencyRepository:
 
-
-    def get_all(self) -> QuerySet[Currency]:
+    @staticmethod
+    def get_all() -> QuerySet[Currency]:
         return Currency.objects.all()
 
-    def create(self, data: CurrencyDto) -> Currency:
+    @staticmethod
+    def create(data: CurrencyDto) -> Currency:
         try:
             return Currency.objects.create(**asdict(data))
         except IntegrityError as e:
@@ -25,5 +26,6 @@ class CurrencyRepository:
                     f"Field {filed} with value {getattr(data, filed)} already exists."
                 )
 
-    def get(self, **params) -> Currency:
+    @staticmethod
+    def get(**params) -> Currency:
         return Currency.objects.get(**params)
