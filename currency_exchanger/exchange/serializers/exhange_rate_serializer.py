@@ -7,7 +7,7 @@ class ExchangeRateSerializer(serializers.Serializer):
     baseCurrencyCode = serializers.CharField(max_length=3, write_only=True)
     targetCurrencyCode = serializers.CharField(max_length=3, write_only=True)
 
-    baseCurrency = CurrencySerializer(source="BaseCurrencyId", read_only=True)
-    targetCurrency = CurrencySerializer(source="TargetCurrencyId", read_only=True)
+    baseCurrency = CurrencySerializer(source="base_currency", read_only=True)
+    targetCurrency = CurrencySerializer(source="target_currency", read_only=True)
 
     rate = serializers.FloatField()

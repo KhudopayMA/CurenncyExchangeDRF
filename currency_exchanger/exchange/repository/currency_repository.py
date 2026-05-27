@@ -10,6 +10,7 @@ from exchange.dto import CurrencyDto
 
 class CurrencyRepository:
 
+
     def get_all(self) -> QuerySet[Currency]:
         return Currency.objects.all()
 
