@@ -1,2 +1,3 @@
 from .currency_serializer import CurrencySerializer
-from .exhange_rate_serializer import ExchangeRateCreateSerializer, ExchangeRateResponseSerializer
+from .exchange_rate_serializer import (ExchangeRatesRequestSerializer, ExchangeRatesResponseSerializer,
+                                      ExchangeRateRequestSerializer)

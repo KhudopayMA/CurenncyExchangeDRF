@@ -19,3 +19,17 @@ class ExchangeRateService:
         )
         exchange_rate = ExchangeRateRepository.create(exchange_rate_dto)
         return exchange_rate
+
+    @staticmethod
+    def get_exchange_rate(code_pair: str) -> ExchangeRate:
+        base_currency = CurrencyRepository.get(
+            code=code_pair[0:3]
+        )
+        target_currency = CurrencyRepository.get(
+            code=code_pair[3:6]
+        )
+        exchange_rate = ExchangeRateRepository.get(
+            base_currency = base_currency,
+            target_currency = target_currency,
+        )
+        return exchange_rate

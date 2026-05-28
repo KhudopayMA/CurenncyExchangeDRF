@@ -15,6 +15,10 @@ class ExchangeRateRepository:
         return ExchangeRate.objects.all()
 
     @staticmethod
+    def get(**params) -> ExchangeRate:
+        return ExchangeRate.objects.get(**params)
+
+    @staticmethod
     def create(data: ExchangeRateDto) -> ExchangeRate:
         try:
             return ExchangeRate.objects.create(**asdict(data))
