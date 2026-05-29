@@ -1,6 +1,8 @@
 from exchange.dto.exchange_rate_dto import CreateExchangeRateDTO, ExchangeRateDto
+from exchange.exceptions.database_operation_exception import NotFound
 from exchange.models import ExchangeRate
 from exchange.repository import CurrencyRepository, ExchangeRateRepository
+
 
 class ExchangeRateService:
 
@@ -28,8 +30,11 @@ class ExchangeRateService:
         target_currency = CurrencyRepository.get(
             code=code_pair[3:6]
         )
-        exchange_rate = ExchangeRateRepository.get(
-            base_currency = base_currency,
-            target_currency = target_currency,
-        )
+        try:
+            exchange_rate = ExchangeRateRepository.get(
+                base_currency_id=base_currency.id,
+                target_currency_id=target_currency.id,
+            )
+        except NotFound:
+            raise NotFound("Exchange rate for code pair not found")
         return exchange_rate

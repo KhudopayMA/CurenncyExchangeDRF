@@ -5,6 +5,7 @@ from django.db.models import QuerySet
 
 from exchange.dto import ExchangeRateDto, RequestExchangeRateDto
 from exchange.exceptions import DatabaseOperationException
+from exchange.exceptions.database_operation_exception import NotFound
 from exchange.models import ExchangeRate, Currency
 
 
@@ -16,7 +17,10 @@ class ExchangeRateRepository:
 
     @staticmethod
     def get(**params) -> ExchangeRate:
-        return ExchangeRate.objects.get(**params)
+        try:
+            return ExchangeRate.objects.get(**params)
+        except ExchangeRate.DoesNotExist:
+            raise NotFound()
 
     @staticmethod
     def create(data: ExchangeRateDto) -> ExchangeRate:

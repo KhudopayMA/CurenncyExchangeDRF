@@ -5,8 +5,10 @@ from django.db import IntegrityError
 from rest_framework.exceptions import ValidationError
 
 from exchange.exceptions import DatabaseOperationException
+from exchange.exceptions.database_operation_exception import NotFound
 from exchange.models import Currency
 from exchange.dto import CurrencyDto
+
 
 class CurrencyRepository:
 

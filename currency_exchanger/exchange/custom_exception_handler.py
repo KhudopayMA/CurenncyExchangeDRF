@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from exchange.exceptions import DatabaseOperationException
+from exchange.exceptions.database_operation_exception import NotFound
 
 
 def custom_exception_handler(exc, context):
@@ -17,6 +18,14 @@ def custom_exception_handler(exc, context):
         response = Response(
             data=custom_response_data,
             status=status.HTTP_409_CONFLICT
+        )
+    elif isinstance(exc, NotFound):
+        custom_response_data = {
+            'message': str(exc)
+        }
+        response = Response(
+            data=custom_response_data,
+            status=status.HTTP_404_NOT_FOUND
         )
     else:
         response = Response(
