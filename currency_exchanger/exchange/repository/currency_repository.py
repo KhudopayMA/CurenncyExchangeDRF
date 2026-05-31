@@ -1,4 +1,5 @@
 from dataclasses import asdict
+from typing import Optional
 
 from django.db.models import QuerySet
 from django.db import IntegrityError
@@ -13,11 +14,11 @@ from exchange.dto import CurrencyDto
 class CurrencyRepository:
 
     @staticmethod
-    def get_all() -> QuerySet[Currency]:
-        return Currency.objects.all()
+    def get_all() -> list[Currency]:
+        return list(Currency.objects.all())
 
     @staticmethod
-    def create(data: CurrencyDto) -> Currency:
+    def create(data: CurrencyDto) -> Optional[Currency]:
         try:
             return Currency.objects.create(**asdict(data))
         except IntegrityError as e:

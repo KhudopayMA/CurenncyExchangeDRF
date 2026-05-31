@@ -3,7 +3,7 @@ from dataclasses import asdict
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from exchange.dto import ExchangeRateDto, RequestExchangeRateDto, CreateExchangeRateDTO, GetExchangeDto
+from exchange.dto import ExchangeRateDto, GetRequestExchangeRateDto, CreateExchangeRateDTO, GetExchangeDto
 from exchange.models import ExchangeRate, Currency
 from exchange.repository import ExchangeRateRepository, CurrencyRepository
 from exchange.serializers import ExchangeRatesRequestSerializer, ExchangeRatesResponseSerializer, \

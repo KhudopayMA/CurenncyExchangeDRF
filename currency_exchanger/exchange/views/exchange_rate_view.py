@@ -5,10 +5,11 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from exchange.dto import ExchangeRateDto, RequestExchangeRateDto, CreateExchangeRateDTO
+from exchange.dto import ExchangeRateDto, GetRequestExchangeRateDto, CreateExchangeRateDTO, UpdateExchangeRateDTO
 from exchange.models import ExchangeRate, Currency
 from exchange.repository import ExchangeRateRepository, CurrencyRepository
-from exchange.serializers import ExchangeRatesRequestSerializer, ExchangeRatesResponseSerializer, ExchangeRateRequestSerializer
+from exchange.serializers import ExchangeRatesRequestSerializer, ExchangeRatesResponseSerializer, \
+    ExchangeRateRequestSerializer, UpdateExchangeRateRequestSerializer
 from exchange.services import ExchangeRateService
 
 
@@ -35,4 +36,16 @@ class ExchangeRateView(APIView):
         response_serializer = ExchangeRatesResponseSerializer(exchange_rate)
         return Response(response_serializer.data)
 
-
+    def patch(self, request: Request, code_pair: str):
+        request_serializer = UpdateExchangeRateRequestSerializer(
+            data={"code_pair": code_pair, "rate": request.data["rate"]}
+        )
+        request_serializer.is_valid(raise_exception=True)
+        dto = UpdateExchangeRateDTO(
+            base_currency_code=request_serializer.data["code_pair"][0:3],
+            target_currency_code=request_serializer.data["code_pair"][3:6],
+            rate=request_serializer.data["rate"],
+        )
+        exchange_rate = ExchangeRateService.update_exchange_rate(dto)
+        response_serializer = ExchangeRatesResponseSerializer(exchange_rate)
+        return Response(response_serializer.data)

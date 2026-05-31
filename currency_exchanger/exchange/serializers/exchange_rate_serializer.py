@@ -17,3 +17,8 @@ class ExchangeRatesResponseSerializer(serializers.Serializer):
 
 class ExchangeRateRequestSerializer(serializers.Serializer):
     code_pair = serializers.CharField(max_length=6)
+
+
+class UpdateExchangeRateRequestSerializer(serializers.Serializer):
+    code_pair = serializers.CharField(max_length=6)
+    rate = serializers.DecimalField(max_digits=100, decimal_places=28)

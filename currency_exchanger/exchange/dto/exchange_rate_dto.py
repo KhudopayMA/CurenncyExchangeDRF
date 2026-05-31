@@ -11,7 +11,7 @@ class ExchangeRateDto:
     rate: Decimal
 
 @dataclass
-class RequestExchangeRateDto:
+class GetRequestExchangeRateDto:
     base_currency_id: int
     target_currency_id: int
     rate: Decimal
@@ -21,3 +21,10 @@ class CreateExchangeRateDTO:
     base_currency_code: str
     target_currency_code: str
     rate: Decimal
+
+@dataclass
+class UpdateExchangeRateDTO:
+    base_currency_code: str
+    target_currency_code: str
+    rate: Decimal
+
