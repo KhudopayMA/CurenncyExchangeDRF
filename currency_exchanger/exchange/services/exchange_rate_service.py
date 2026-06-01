@@ -10,10 +10,19 @@ class ExchangeRateService:
 
     @staticmethod
     def create_exchange_rate(dto: CreateExchangeRateDTO) -> ExchangeRate:
-        base_currency = CurrencyRepository.get(
+        """
+        Contains buisness logic of exchange rate creation.
+
+        Args:
+            dto (CreateExchangeRateDTO): CreateExchangeRateDTO object with data for currency creation
+
+        Returns:
+            ExchangeRate: created exchange rate
+        """
+        base_currency = CurrencyRepository.get_by_code(
             code=dto.base_currency_code
         )
-        target_currency = CurrencyRepository.get(
+        target_currency = CurrencyRepository.get_by_code(
             code=dto.target_currency_code
         )
         exchange_rate_dto = ExchangeRateDto(
@@ -26,10 +35,19 @@ class ExchangeRateService:
 
     @staticmethod
     def get_exchange_rate(code_pair: str) -> Optional[ExchangeRate]:
-        base_currency = CurrencyRepository.get(
+        """
+        Contains buisness logic of get exchange rate by code pair.
+
+        Args:
+            code_pair (str): currencies code_pair
+
+        Returns:
+            ExchangeRate: found exchange rate
+        """
+        base_currency = CurrencyRepository.get_by_code(
             code=code_pair[0:3]
         )
-        target_currency = CurrencyRepository.get(
+        target_currency = CurrencyRepository.get_by_code(
             code=code_pair[3:6]
         )
         try:
@@ -40,14 +58,22 @@ class ExchangeRateService:
             return exchange_rate
         except NotFound:
             return None
-            # raise NotFound("Exchange rate for code pair not found")
 
     @staticmethod
-    def update_exchange_rate(dto : UpdateExchangeRateDTO) -> ExchangeRate:
-        base_currency = CurrencyRepository.get(
+    def update_exchange_rate(dto: UpdateExchangeRateDTO) -> ExchangeRate:
+        """
+        Contains buisness logic of update exchange rate.
+
+        Args:
+            dto (UpdateExchangeRateDTO): UpdateExchangeRateDTO object with data for currency update
+
+        Returns:
+            ExchangeRate: updated exchange rate
+        """
+        base_currency = CurrencyRepository.get_by_code(
             code=dto.base_currency_code
         )
-        target_currency = CurrencyRepository.get(
+        target_currency = CurrencyRepository.get_by_code(
             code=dto.target_currency_code
         )
         exchange_rate_dto = ExchangeRateDto(

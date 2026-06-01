@@ -1,9 +1,6 @@
 from dataclasses import asdict
-from typing import Optional
 
-from django.db.models import QuerySet
 from django.db import IntegrityError
-from rest_framework.exceptions import ValidationError
 
 from exchange.exceptions import DatabaseOperationException
 from exchange.exceptions.database_operation_exception import NotFound
@@ -15,10 +12,27 @@ class CurrencyRepository:
 
     @staticmethod
     def get_all() -> list[Currency]:
+        """
+            Returns all currencies.
+        Returns:
+            list[Currency]
+        """
         return list(Currency.objects.all())
 
     @staticmethod
-    def create(data: CurrencyDto) -> Optional[Currency]:
+    def create(data: CurrencyDto) -> Currency:
+        """
+
+        Args:
+            data (CurrencyDto): CurrencyDto object with data for currency creation
+
+        Returns:
+            Currency: created currency object
+
+        Raises:
+            DatabaseOperationException: It is called in case of database errors and contains a message with
+             a domain description of the cause of the error, abstracting from the technical part.
+        """
         try:
             return Currency.objects.create(**asdict(data))
         except IntegrityError as e:
@@ -30,5 +44,21 @@ class CurrencyRepository:
                 )
 
     @staticmethod
-    def get(**params) -> Currency:
-        return Currency.objects.get(**params)
+    def get_by_code(code: str) -> Currency:
+        """
+        Find currency by code and return it.
+
+        Args:
+            code (str): Currency code
+
+        Returns:
+            Currency: found currency
+
+        Raises:
+            Currency.DoesNotExist: Raised if Currency not found
+        """
+        try:
+            return Currency.objects.get(code)
+        except Currency.DoesNotExist:
+            raise NotFound(f"Currency with code {code} not found")
+

@@ -6,6 +6,9 @@ from exchange.serializers import CurrencySerializer
 
 
 class GetExchangeRequestSerializer(serializers.Serializer):
+    """
+        Serializer for get request of exchange.
+    """
     from_currency_code = serializers.CharField(max_length=3)
     to_currency_code = serializers.CharField(max_length=3)
     amount = serializers.DecimalField(max_digits=100, decimal_places=28)
@@ -23,6 +26,9 @@ class GetExchangeRequestSerializer(serializers.Serializer):
 
 
 class GetExchangeResponseSerializer(serializers.Serializer):
+    """
+        Serializer for get response of exchange.
+    """
     baseCurrency = CurrencySerializer(source='base_currency')
     targetCurrency = CurrencySerializer(source='target_currency')
     rate = serializers.FloatField()

@@ -8,35 +8,40 @@ from rest_framework.views import APIView
 from exchange.dto import ExchangeRateDto, GetRequestExchangeRateDto, CreateExchangeRateDTO, UpdateExchangeRateDTO
 from exchange.models import ExchangeRate, Currency
 from exchange.repository import ExchangeRateRepository, CurrencyRepository
-from exchange.serializers import ExchangeRatesRequestSerializer, ExchangeRatesResponseSerializer, \
-    ExchangeRateRequestSerializer, UpdateExchangeRateRequestSerializer
+from exchange.serializers import CreateExchangeRatesRequestSerializer, CreateExchangeRatesResponseSerializer, \
+    GetExchangeRateRequestSerializer, UpdateExchangeRateRequestSerializer, GetExchangeRateResponseSerializer, \
+    UpdateExchangeRateResponseSerializer
 from exchange.services import ExchangeRateService
-
-
 
 
 class ExchangeRateView(APIView):
 
-    def get(self, request: Request, code_pair: str):
-        request_serializer = ExchangeRateRequestSerializer(data={"code_pair": code_pair})
+    def get(self, request: Request, code_pair: str) -> Response:
+        """
+        Get exchange rate by code pair.
+
+        Args:
+            request (Request): Contains request data
+            code_pair (str): path parameter indicating the currencies code pair
+        Returns:
+            Response: Contains data of found exchange rate
+        """
+        request_serializer = GetExchangeRateRequestSerializer(data={"code_pair": code_pair})
         request_serializer.is_valid(raise_exception=True)
         exchange_rate = ExchangeRateService.get_exchange_rate(request_serializer.validated_data["code_pair"])
-        response_serializer = ExchangeRatesResponseSerializer(exchange_rate)
+        response_serializer = GetExchangeRateResponseSerializer(exchange_rate)
         return Response(response_serializer.data)
 
-    def post(self, request: Request):
-        request_serializer = ExchangeRatesRequestSerializer(data=request.data)
-        request_serializer.is_valid(raise_exception=True)
-        dto = CreateExchangeRateDTO(
-            base_currency_code=request_serializer.data["baseCurrencyCode"],
-            target_currency_code=request_serializer.data["targetCurrencyCode"],
-            rate=request_serializer.data["rate"],
-        )
-        exchange_rate = ExchangeRateService.create_exchange_rate(dto)
-        response_serializer = ExchangeRatesResponseSerializer(exchange_rate)
-        return Response(response_serializer.data)
+    def patch(self, request: Request, code_pair: str) -> Response:
+        """
+        Patch exchange rate.
 
-    def patch(self, request: Request, code_pair: str):
+        Args:
+            request (Request): Contains request data
+            code_pair (str): path parameter indicating the currencies code pai
+        Returns:
+            Response: Contains data of patch exchange rate
+        """
         request_serializer = UpdateExchangeRateRequestSerializer(
             data={"code_pair": code_pair, "rate": request.data["rate"]}
         )
@@ -47,5 +52,5 @@ class ExchangeRateView(APIView):
             rate=request_serializer.data["rate"],
         )
         exchange_rate = ExchangeRateService.update_exchange_rate(dto)
-        response_serializer = ExchangeRatesResponseSerializer(exchange_rate)
+        response_serializer = UpdateExchangeRateResponseSerializer(exchange_rate)
         return Response(response_serializer.data)

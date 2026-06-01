@@ -2,12 +2,11 @@ from dataclasses import asdict
 from typing import Optional
 
 from django.db import IntegrityError
-from django.db.models import QuerySet
 
-from exchange.dto import ExchangeRateDto, GetRequestExchangeRateDto
+from exchange.dto import ExchangeRateDto
 from exchange.exceptions import DatabaseOperationException
 from exchange.exceptions.database_operation_exception import NotFound
-from exchange.models import ExchangeRate, Currency
+from exchange.models import ExchangeRate
 
 
 class ExchangeRateRepository:
@@ -37,9 +36,10 @@ class ExchangeRateRepository:
 
     @classmethod
     def update(cls, data: ExchangeRateDto) -> ExchangeRate:
-        exchange_rate = cls.get(base_currency_id=data.base_currency_id,
-                                target_currency_id=data.target_currency_id
+        exchange_rate = cls.get(
+            base_currency_id=data.base_currency_id,
+            target_currency_id=data.target_currency_id
         )
-        exchange_rate.rate=data.rate
+        exchange_rate.rate = data.rate
         exchange_rate.save()
         return exchange_rate

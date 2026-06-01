@@ -1,3 +1,3 @@
 from .currency_dto import CurrencyDto
 from .exchange_rate_dto import ExchangeRateDto, GetRequestExchangeRateDto, CreateExchangeRateDTO, UpdateExchangeRateDTO
-from .exchange_dto import GetExchangeDto, ExchangeRateDto
+from .exchange_dto import GetExchangeRequestDto, GetExchangeResponseDto

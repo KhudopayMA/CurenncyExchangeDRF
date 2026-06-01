@@ -5,7 +5,10 @@ from exchange.models import Currency
 
 
 @dataclass
-class ExchangeRateDto:
+class GetExchangeResponseDto:
+    """
+    Dto contains all field of exchange rate model except id
+    """
     base_currency: Currency
     target_currency: Currency
     rate: Decimal
@@ -14,7 +17,10 @@ class ExchangeRateDto:
 
 
 @dataclass
-class GetExchangeDto:
+class GetExchangeRequestDto:
+    """
+    Dto for get request of exchange
+    """
     from_currency_code: str
     to_currency_code: str
     amount: Decimal
