@@ -2,10 +2,10 @@ from dataclasses import asdict
 
 from django.db import IntegrityError
 
-from exchange.exceptions import DatabaseOperationException
-from exchange.exceptions.database_operation_exception import NotFound
-from exchange.models import Currency
-from exchange.dto import CurrencyDto
+from currency_exchange.exceptions import DatabaseOperationException
+from currency_exchange.exceptions.database_operation_exception import NotFound
+from currency_exchange.models import Currency
+from currency_exchange.dto import CurrencyDto
 
 
 class CurrencyRepository:
@@ -58,7 +58,7 @@ class CurrencyRepository:
             Currency.DoesNotExist: Raised if Currency not found
         """
         try:
-            return Currency.objects.get(code)
+            return Currency.objects.get(code=code)
         except Currency.DoesNotExist:
             raise NotFound(f"Currency with code {code} not found")
 

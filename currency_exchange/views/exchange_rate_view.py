@@ -5,13 +5,13 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from exchange.dto import ExchangeRateDto, GetRequestExchangeRateDto, CreateExchangeRateDTO, UpdateExchangeRateDTO
-from exchange.models import ExchangeRate, Currency
-from exchange.repository import ExchangeRateRepository, CurrencyRepository
-from exchange.serializers import CreateExchangeRatesRequestSerializer, CreateExchangeRatesResponseSerializer, \
+from currency_exchange.dto import ExchangeRateDto, GetRequestExchangeRateDto, CreateExchangeRateDTO, UpdateExchangeRateDTO
+from currency_exchange.models import ExchangeRate, Currency
+from currency_exchange.repository import ExchangeRateRepository, CurrencyRepository
+from currency_exchange.serializers import CreateExchangeRatesRequestSerializer, CreateExchangeRatesResponseSerializer, \
     GetExchangeRateRequestSerializer, UpdateExchangeRateRequestSerializer, GetExchangeRateResponseSerializer, \
     UpdateExchangeRateResponseSerializer
-from exchange.services import ExchangeRateService
+from currency_exchange.services import ExchangeRateService
 
 
 class ExchangeRateView(APIView):

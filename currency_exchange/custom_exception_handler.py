@@ -2,8 +2,8 @@ from rest_framework.views import exception_handler
 from rest_framework import status
 from rest_framework.response import Response
 
-from exchange.exceptions import DatabaseOperationException
-from exchange.exceptions.database_operation_exception import NotFound
+from currency_exchange.exceptions import DatabaseOperationException
+from currency_exchange.exceptions.database_operation_exception import NotFound
 
 
 def custom_exception_handler(exc, context):

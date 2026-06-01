@@ -1,6 +1,6 @@
 from django.db import models
 
-from exchange.models import Currency
+from currency_exchange.models import Currency
 
 
 class ExchangeRate(models.Model):

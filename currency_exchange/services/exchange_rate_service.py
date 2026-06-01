@@ -1,9 +1,9 @@
 from typing import Optional
 
-from exchange.dto.exchange_rate_dto import CreateExchangeRateDTO, ExchangeRateDto, UpdateExchangeRateDTO
-from exchange.exceptions.database_operation_exception import NotFound
-from exchange.models import ExchangeRate
-from exchange.repository import CurrencyRepository, ExchangeRateRepository
+from currency_exchange.dto.exchange_rate_dto import CreateExchangeRateDTO, ExchangeRateDto, UpdateExchangeRateDTO
+from currency_exchange.exceptions.database_operation_exception import NotFound
+from currency_exchange.models import ExchangeRate
+from currency_exchange.repository import CurrencyRepository, ExchangeRateRepository
 
 
 class ExchangeRateService:

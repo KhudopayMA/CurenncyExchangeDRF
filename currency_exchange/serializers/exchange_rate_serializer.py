@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from exchange.serializers import CurrencySerializer
+from currency_exchange.serializers import CurrencySerializer
 
 
 class CreateExchangeRatesRequestSerializer(serializers.Serializer):

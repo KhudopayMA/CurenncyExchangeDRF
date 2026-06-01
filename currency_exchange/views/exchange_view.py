@@ -1,9 +1,9 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from exchange.dto import GetExchangeRequestDto
-from exchange.serializers import GetExchangeRequestSerializer, GetExchangeResponseSerializer
-from exchange.services import ExchangeService
+from currency_exchange.dto import GetExchangeRequestDto
+from currency_exchange.serializers import GetExchangeRequestSerializer, GetExchangeResponseSerializer
+from currency_exchange.services import ExchangeService
 
 
 class ExchangeView(APIView):

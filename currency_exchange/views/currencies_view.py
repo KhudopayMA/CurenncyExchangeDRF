@@ -2,9 +2,9 @@ from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.views import APIView
 
-from exchange.dto import CurrencyDto
-from exchange.repository import CurrencyRepository
-from exchange.serializers import CurrencySerializer
+from currency_exchange.dto import CurrencyDto
+from currency_exchange.repository import CurrencyRepository
+from currency_exchange.serializers import CurrencySerializer
 
 
 class CurrenciesView(APIView):

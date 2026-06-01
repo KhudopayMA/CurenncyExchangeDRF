@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from decimal import Decimal
 
-from exchange.models import Currency
+from currency_exchange.models import Currency
 
 
 @dataclass

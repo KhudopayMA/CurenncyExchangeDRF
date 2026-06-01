@@ -4,10 +4,10 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from exchange.dto import CreateExchangeRateDTO
-from exchange.repository import ExchangeRateRepository
-from exchange.serializers import CreateExchangeRatesResponseSerializer, CreateExchangeRatesRequestSerializer
-from exchange.services import ExchangeRateService
+from currency_exchange.dto import CreateExchangeRateDTO
+from currency_exchange.repository import ExchangeRateRepository
+from currency_exchange.serializers import CreateExchangeRatesResponseSerializer, CreateExchangeRatesRequestSerializer
+from currency_exchange.services import ExchangeRateService
 
 
 class ExchangeRatesView(APIView):

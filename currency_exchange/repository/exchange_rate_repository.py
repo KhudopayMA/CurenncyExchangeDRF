@@ -3,10 +3,10 @@ from typing import Optional
 
 from django.db import IntegrityError
 
-from exchange.dto import ExchangeRateDto
-from exchange.exceptions import DatabaseOperationException
-from exchange.exceptions.database_operation_exception import NotFound
-from exchange.models import ExchangeRate
+from currency_exchange.dto import ExchangeRateDto
+from currency_exchange.exceptions import DatabaseOperationException
+from currency_exchange.exceptions.database_operation_exception import NotFound
+from currency_exchange.models import ExchangeRate
 
 
 class ExchangeRateRepository:

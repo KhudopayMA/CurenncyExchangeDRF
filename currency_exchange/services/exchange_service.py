@@ -1,8 +1,8 @@
 from typing import Optional
 
-from exchange.dto import GetExchangeRequestDto, GetExchangeResponseDto
-from exchange.exceptions.database_operation_exception import NotFound
-from exchange.services import ExchangeRateService
+from currency_exchange.dto import GetExchangeRequestDto, GetExchangeResponseDto
+from currency_exchange.exceptions.database_operation_exception import NotFound
+from currency_exchange.services import ExchangeRateService
 
 
 class ExchangeService:

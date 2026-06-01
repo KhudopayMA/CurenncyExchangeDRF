@@ -2,7 +2,7 @@ from copy import copy
 
 from rest_framework import serializers
 
-from exchange.serializers import CurrencySerializer
+from currency_exchange.serializers import CurrencySerializer
 
 
 class GetExchangeRequestSerializer(serializers.Serializer):

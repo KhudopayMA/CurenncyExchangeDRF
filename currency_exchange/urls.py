@@ -1,6 +1,6 @@
 from django.urls import path
 
-from exchange.views import CurrenciesView, CurrencyView, ExchangeRatesView, ExchangeRateView, ExchangeView
+from currency_exchange.views import CurrenciesView, CurrencyView, ExchangeRatesView, ExchangeRateView, ExchangeView
 
 urlpatterns = [
     path("currencies", CurrenciesView.as_view()),
