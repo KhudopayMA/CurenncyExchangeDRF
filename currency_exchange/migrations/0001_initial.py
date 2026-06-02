@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
         INSERT INTO Сurrencies (Code, FullName, Sign)
         VALUES ("USD", "US Dollar", "$"),
                ("EUR", "Euro", "€"),
-               ("Australian dollar", "AUD", "A$");
+               ("AUD", "Australian dollar", "A$");
         """,
             reverse_sql="""
         DELETE FROM Currencies where sign in ($, €, A$);
