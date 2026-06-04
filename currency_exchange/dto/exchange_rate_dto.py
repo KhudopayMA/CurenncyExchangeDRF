@@ -1,8 +1,10 @@
 from dataclasses import dataclass
 from decimal import Decimal
+from typing import final
 
 
-@dataclass
+@final
+@dataclass(slots=True, frozen=True)
 class ExchangeRateDto:
     """
     Dto contains all field of exchange rate model except id
@@ -12,7 +14,8 @@ class ExchangeRateDto:
     rate: Decimal
 
 
-@dataclass
+@final
+@dataclass(slots=True, frozen=True)
 class GetRequestExchangeRateDto:
     """
     Dto for get request of exchange rate
@@ -22,7 +25,8 @@ class GetRequestExchangeRateDto:
     rate: Decimal
 
 
-@dataclass
+@final
+@dataclass(slots=True, frozen=True)
 class CreateExchangeRateDTO:
     """
     Dto for create request of exchange
@@ -32,7 +36,8 @@ class CreateExchangeRateDTO:
     rate: Decimal
 
 
-@dataclass
+@final
+@dataclass(slots=True, frozen=True)
 class UpdateExchangeRateDTO:
     """
     Dto for update request of exchange

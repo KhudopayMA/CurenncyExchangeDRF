@@ -1,10 +1,12 @@
+from typing import final
 from dataclasses import dataclass
 from decimal import Decimal
 
 from currency_exchange.models import Currency
 
 
-@dataclass
+@final
+@dataclass(slots=True, frozen=True)
 class GetExchangeResponseDto:
     """
     Dto contains all field of exchange rate model except id
@@ -16,7 +18,8 @@ class GetExchangeResponseDto:
     converted_amount: Decimal
 
 
-@dataclass
+@final
+@dataclass(slots=True, frozen=True)
 class GetExchangeRequestDto:
     """
     Dto for get request of exchange
